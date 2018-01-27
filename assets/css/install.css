@@ -1,23 +1,52 @@
-html,body{
-	margin: 0px;
-	background-color: #eeeeee;
-}
-
-h1,h2{
+h1{
 	text-align: center;
 }
 
-.content_view{
-	background-color: #ffffff;
-	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-	
-	margin: auto;
-    max-width: 700px;
-    padding: 10px;
+td {
+	padding-bottom: 10px;
+	vertical-align: top;
 }
 
-@media only screen and (max-width: 500px) {
-    .content_view {
-		
-    }
+tr td:nth-child(1){
+	white-space:nowrap;
+}
+
+form{
+	margin-bottom: 0px;
+}
+
+.error{
+	color: red;
+}
+
+#set_password_status{
+	width: calc(100% - 15px);
+	padding: 5px;
+	padding-right: 10px;
+	background-color: #4CAF50;
+	text-align: center;
+}
+
+input {
+    min-width: 300px;
+    padding: 5px 5px;
+    border: 1px solid #ccc;
+    font-size: 15px;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+#submit_button {
+	width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#submit_button:disabled {
+	background-color: #aaa;
+	cursor: pointer;
 }
