@@ -15,7 +15,7 @@
 		<h1>Sagara Logboek</h1>
 		<?php
 			if(isset($_POST['status'])){
-				require("Scripts/run_install.php");
+				require("Scripts/install/run_install.php");
 			}
 		?>
 		<h2>Install Script</h2>

@@ -18,7 +18,18 @@ include($ini_array['BasePath']."Scripts/Encryption.php");
 //$_POST['iv'] = $PersonalKey;
 
 if(!isset($_POST['user']) || $_POST['user']=="" || !isset($_POST['pw']) || $_POST['pw']==""){
-	echo json_encode(array("login"=>"failed", "message"=>"no credentials"), true);
+	$ErrorState = array(
+		"login"=>"failed", "message"=>"", "header"=>getallheaders()
+	);
+	if(!isset($_POST['user']) || $_POST['user']==""){
+		if($ErrorState["message"]!="")$ErrorState["message"].=", ";
+		$ErrorState["message"].="User Empty";
+	}
+	if(!isset($_POST['pw']) || $_POST['pw']==""){
+		if($ErrorState["message"]!="")$ErrorState["message"].=", ";
+		$ErrorState["message"].="PW Empty";
+	}
+	echo json_encode($ErrorState, true);
 	die;
 }
 
