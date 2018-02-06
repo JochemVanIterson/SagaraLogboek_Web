@@ -50,3 +50,7 @@ input {
 	background-color: #aaa;
 	cursor: pointer;
 }
+
+.content_view{
+	margin-top: 10px;
+}

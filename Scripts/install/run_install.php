@@ -55,6 +55,7 @@
 		fwrite($config_file, "\$ini_array['msql_pwd'] = '".$_POST['msql_pwd']."';\n\n");
 		fwrite($config_file, "\$ini_array['BasePath'] = '".$_POST['BasePath']."';\n");
 		fwrite($config_file, "\$ini_array['BaseURL'] = '".$_POST['BaseURL']."';\n");
+		fwrite($config_file, "\$ini_array['RelativeURL'] = '".$_POST['RelativeURL']."';\n");
 		fwrite($config_file, "\$ini_array['PrivateKey'] = '".$_POST['PrivateKey']."';\n");
 		fclose($config_file);
 	}
@@ -71,11 +72,17 @@
 		
 		// ---------Prepend prefix to tables--------- //
 		$prefixUsers = $_POST['msql_prefix']."Users";
+		$prefixCatagories = $_POST['msql_prefix']."Catagories";
 		
 		// ---------Check if DB exists--------- //
 		$sql_CheckDB_Users = mysqli_query($conn, "select 1 from $prefixUsers");
+		$sql_CheckDB_Catagories = mysqli_query($conn, "select 1 from $prefixCatagories");
 		if($sql_CheckDB_Users !== FALSE){
 			$install_error['msql_error'] = "Table '$prefixUsers' already exists. Change prefix, or remove the existing db";
+			return $install_error;
+		}
+		if($sql_CheckDB_Catagories !== FALSE){
+			$install_error['msql_error'] = "Table '$prefixCatagories' already exists. Change prefix, or remove the existing db";
 			return $install_error;
 		}
 		
@@ -87,12 +94,25 @@
 			`firstname` varchar(64) DEFAULT NULL,
 			`lastname` varchar(64) DEFAULT NULL,
 			`mail` varchar(128) DEFAULT NULL,
+			`admin` bool DEFAULT 0,
 			`password` varchar(256) NOT NULL DEFAULT '',
 			`iv` varchar(32) DEFAULT NULL,
 			`last_login` datetime DEFAULT NULL,
 			PRIMARY KEY (`id`)
 		) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
 		if(!mysqli_query($conn, $sql_CreateDB_Users)) {
+			$install_error['msql_error'] = "SQL error: ".mysqli_connect_error();
+			return $install_error;
+		}
+		
+		$sql_CreateDB_Catagories = "CREATE TABLE `$prefixCatagories` (
+			`id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+			`name` varchar(64) DEFAULT NULL,
+			`icon_vector` longblob,
+			`data` longblob,
+			PRIMARY KEY (`id`)
+		) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
+		if(!mysqli_query($conn, $sql_CreateDB_Catagories)) {
 			$install_error['msql_error'] = "SQL error: ".mysqli_connect_error();
 			return $install_error;
 		}
@@ -109,8 +129,8 @@
 		$adminIV = randomString(16); //Unieke code per user, voor "end to end" encryptie
 		$adminPasswordRaw = $_POST['admin_password'];
 		$adminPasswordEnc = Encryption::encrypt($_POST['PrivateKey'], $adminIV, $adminPasswordRaw);
-		$sql_Insert_AdminUser = "REPLACE INTO $prefixUsers (firstname, lastname, username, mail, password, iv)
-		VALUES ('$adminFirstname', '$adminLastname', '$adminUsername', '$adminMail', '$adminPasswordEnc', '$adminIV')";
+		$sql_Insert_AdminUser = "REPLACE INTO $prefixUsers (firstname, lastname, username, mail, admin, password, iv)
+		VALUES ('$adminFirstname', '$adminLastname', '$adminUsername', '$adminMail', 1, '$adminPasswordEnc', '$adminIV')";
 		
 		if (!mysqli_query($conn, $sql_Insert_AdminUser)) {
 			$install_error['msql_error'] = "SQL error: ".mysqli_connect_error();

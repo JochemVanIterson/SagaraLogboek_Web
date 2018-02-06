@@ -7,30 +7,27 @@ require_once("../config.php");
 include($ini_array['BasePath']."Scripts/SQL.php");
 include($ini_array['BasePath']."Scripts/Encryption.php");
 
-//$_POST['user'] = "jochem.vaniterson";
-//$_POST['pw'] = "ruimte";
-//
-//$PrivateKey = $ini_array['PrivateKey'];
-//$PersonalKey = "7hz7brbszvzq2zn7";
-//$password_enc = Encryption::encrypt($PrivateKey, $PersonalKey, $_POST['pw']);
-////echo $password_enc;
-//$_POST['pw'] = $password_enc;
-//$_POST['iv'] = $PersonalKey;
-
 if(!isset($_POST['user']) || $_POST['user']=="" || !isset($_POST['pw']) || $_POST['pw']==""){
 	$ErrorState = array(
-		"login"=>"failed", "message"=>"", "header"=>getallheaders()
+		"login"=>"failed", "message"=>"", "header"=>getallheaders(), "POST"=>$_POST
 	);
 	if(!isset($_POST['user']) || $_POST['user']==""){
 		if($ErrorState["message"]!="")$ErrorState["message"].=", ";
 		$ErrorState["message"].="User Empty";
+		$ErrorState["message"].="User Empty, ".json_encode($_POST, true);
 	}
 	if(!isset($_POST['pw']) || $_POST['pw']==""){
 		if($ErrorState["message"]!="")$ErrorState["message"].=", ";
-		$ErrorState["message"].="PW Empty";
+		$ErrorState["message"].="PW Empty, ".json_encode($_POST, true);
 	}
 	echo json_encode($ErrorState, true);
 	die;
+}
+
+if(isset($_POST['raw'])){
+	$PrivateKey = $ini_array['PrivateKey'];
+	$_POST['iv'] = Encryption::randomString(16);
+	$_POST['pw'] = Encryption::encrypt($PrivateKey, $_POST['iv'], $_POST['pw']);
 }
 
 $SQL = new SQL($ini_array);

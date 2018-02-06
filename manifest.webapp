@@ -1,0 +1,23 @@
+{
+  "short_name": "Sagara Logboek",
+  "name": "Sagara Logboek",
+  "icons": {
+    "16": "assets/launcher_icons/16.png",
+    "48": "assets/launcher_icons/48.png",
+    "60": "assets/launcher_icons/60.png",
+    "96": "assets/launcher_icons/96.png",
+    "128": "assets/launcher_icons/128.png",
+    "144": "assets/launcher_icons/144.png",
+    "152": "assets/launcher_icons/152.png",
+    "192": "assets/launcher_icons/192.png"
+  },
+  "start_url": "index.html",
+  "launch_path": "/index.php”,
+  "display": "standalone",
+  "background_color": "#1565C0",
+  "theme_color": "#0D47A1",
+  "developer": {
+    "name": "Jochem van Iterson",
+    "url": "http://audioware.nl/"
+  }
+}

@@ -4,6 +4,7 @@
 	error_reporting(E_ALL);
 ?>
 <head>
+	<link rel="stylesheet" type="text/css" href="assets/css/colors.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/theme.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/install.css">
 	<script src="assets/js/jquery-3.2.1.min.js"></script>
@@ -166,10 +167,12 @@
 			</table>
 			<?php
 				$BasePath = __DIR__;
-				$BaseURL = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+				$BaseURL = "$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 				$BaseURL = str_replace("install.php", "", $BaseURL);
+				$RelativeURL = str_replace("install.php", "", $_SERVER['REQUEST_URI']);
 				echo "<input hidden name='BasePath' value='$BasePath'>";
 				echo "<input hidden name='BaseURL' value='$BaseURL'>";
+				echo "<input hidden name='RelativeURL' value='$RelativeURL'>";
 				echo "<input hidden name='status' value='installing'>";
 			?>
 			</form>

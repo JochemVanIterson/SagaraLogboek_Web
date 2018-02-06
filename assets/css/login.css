@@ -10,12 +10,19 @@
     }
 }
 
+@media only screen and (max-width: 500px) {
+    .login_container {
+		width: 100%;
+    }
+}
+
 .login_icon{
 	display: block;
 	height: 84px;
 	width: 84px;
 	margin: 0 auto 25px;
 	padding: 0;
+	pointer-events: none;
 }
 
 .login_box{
