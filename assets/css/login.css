@@ -1,3 +1,13 @@
+html,body{
+	margin: 0px;
+	background-color: var(--Background);
+	height: 100%;
+	width: 100%;
+    min-height: 100%;
+	display: inline-block;
+	flex-direction: column;
+}
+
 .login_container{
 	width: 400px;
 	padding: 8% 0 0;

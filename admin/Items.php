@@ -9,6 +9,7 @@
 		die;
 	}
 ?>
+<link rel="stylesheet" type="text/css" href="../assets/css/admin/admin.css">
 <link rel="stylesheet" type="text/css" href="../assets/css/admin/items.css">
 
 <script type="text/javascript" src="../assets/js/jquery-3.2.1.min.js"></script>

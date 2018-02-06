@@ -13,7 +13,6 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	
 	<link rel="stylesheet" type="text/css" href="../assets/css/colors.css">
-	<link rel="stylesheet" type="text/css" href="../assets/css/theme.css">
 	<link rel="stylesheet" type="text/css" href="../assets/css/ui.css">
 	<link rel="stylesheet" type="text/css" href="../assets/css/main.css">
 	<link rel="stylesheet" type="text/css" href="../assets/css/admin/admin.css">

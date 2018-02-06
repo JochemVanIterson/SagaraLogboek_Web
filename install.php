@@ -5,7 +5,6 @@
 ?>
 <head>
 	<link rel="stylesheet" type="text/css" href="assets/css/colors.css">
-	<link rel="stylesheet" type="text/css" href="assets/css/theme.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/install.css">
 	<script src="assets/js/jquery-3.2.1.min.js"></script>
 	<script src="assets/js/pw_checker.js"></script>

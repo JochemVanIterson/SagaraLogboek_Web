@@ -14,7 +14,6 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	
 	<link rel="stylesheet" type="text/css" href="assets/css/colors.css">
-	<link rel="stylesheet" type="text/css" href="assets/css/theme.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/main.css">
 	<script type="text/javascript" src="assets/js/cookieHandler.js"></script>
 	<?php //php inits

@@ -1,26 +1,4 @@
-.list_element {
-	background-color: #fff;
-	margin: 10px;
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-	transition: 0.3s;
-}
-
-.list_element:hover {
-	box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-}
-
-.list_element > .header {
-	border-bottom: 1px solid #ddd;
-	padding: 12px 10px;
-	text-decoration: none;
-    font-size: 18px;
-    cursor:pointer;
-}
-.list_element > .content {
-	display: none;
-	text-decoration: none;
-    font-size: 16px;
-}
+/* Item Data */
 .ItemForm {
 	width: 100%;
 	border-collapse: collapse;
@@ -57,15 +35,7 @@
 	text-align: center !important;
 }
 
-.FieldTable {
-	width: 100%;
-	border-collapse: collapse;
-}
-
-.FieldTable tr,td {
-	background-color: white;
-}
-
+/* Fields */
 .FieldTable td:nth-child(1){
 	width: 120px;
 }
@@ -83,65 +53,4 @@
 .FieldTable th:nth-child(2){
 	text-align: center;
 	width: 100px;
-}
-
-button {
-    border: none;
-    color: white;
-    padding: 12px 15px;
-    margin:0px;
-    text-align: center;
-    text-decoration: none;
-    font-size: 14px;
-}
-
-.removeButton {
-	background: var(--Accent);
-}
-.removeButton:hover {
-	background: var(--AccentDark);
-}
-.saveButton {
-	background: var(--AccentCustom);
-}
-.saveButton:hover {
-	background: var(--AccentDarkCustom);
-}
-
-.addFieldButton {
-	background: var(--Accent);
-	padding-left: 10px;
-	padding-right: 10px;
-}
-.addFieldButton:hover {
-	background: var(--AccentDark);
-}
-
-.removeFieldButton {
-	width: 40px;
-	background: var(--Accent);
-	padding-left: 10px;
-	padding-right: 10px;
-}
-.removeFieldButton:hover {
-	background: var(--AccentDark);
-}
-
-.emptyField > td {
-	padding-left: 10px !important;
-}
-
-.empty_view {
-	height: calc(100% - 50px);
-	display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    font-size: 32px;
-}
-
-@media only screen and (max-width: 500px) {
-    .list_element {
-    	margin: 10px 0px;
-    }
 }
