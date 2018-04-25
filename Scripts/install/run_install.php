@@ -72,29 +72,43 @@
 		
 		// ---------Prepend prefix to tables--------- //
 		$prefixUsers = $_POST['msql_prefix']."Users";
-		$prefixCatagories = $_POST['msql_prefix']."Catagories";
+		$prefixCategories = $_POST['msql_prefix']."Categories";
+		$prefixItems = $_POST['msql_prefix']."Items";
+		$prefixEntries = $_POST['msql_prefix']."Entries";
 		
 		// ---------Check if DB exists--------- //
 		$sql_CheckDB_Users = mysqli_query($conn, "select 1 from $prefixUsers");
-		$sql_CheckDB_Catagories = mysqli_query($conn, "select 1 from $prefixCatagories");
+		$sql_CheckDB_Catagories = mysqli_query($conn, "select 1 from $prefixCategories");
+		$sql_CheckDB_Items = mysqli_query($conn, "select 1 from $prefixCategories");
+		$sql_CheckDB_Entries = mysqli_query($conn, "select 1 from $prefixCategories");
 		if($sql_CheckDB_Users !== FALSE){
 			$install_error['msql_error'] = "Table '$prefixUsers' already exists. Change prefix, or remove the existing db";
 			return $install_error;
 		}
 		if($sql_CheckDB_Catagories !== FALSE){
-			$install_error['msql_error'] = "Table '$prefixCatagories' already exists. Change prefix, or remove the existing db";
+			$install_error['msql_error'] = "Table '$prefixCategories' already exists. Change prefix, or remove the existing db";
+			return $install_error;
+		}
+		
+		if($sql_CheckDB_Items !== FALSE){
+			$install_error['msql_error'] = "Table '$prefixItems' already exists. Change prefix, or remove the existing db";
+			return $install_error;
+		}
+		
+		if($sql_CheckDB_Entries !== FALSE){
+			$install_error['msql_error'] = "Table '$prefixEntries' already exists. Change prefix, or remove the existing db";
 			return $install_error;
 		}
 		
 		// ---------Creeer Database--------- //
 		// Users DB
-		$sql_CreateDB_Users = "CREATE TABLE `$prefixUsers` (
+		$sql_CreateDB_Users = "CREATE TABLE $prefixUsers (
 			`id` int(11) unsigned NOT NULL AUTO_INCREMENT,
 			`username` varchar(64) NOT NULL DEFAULT '',
 			`firstname` varchar(64) DEFAULT NULL,
 			`lastname` varchar(64) DEFAULT NULL,
 			`mail` varchar(128) DEFAULT NULL,
-			`admin` bool DEFAULT 0,
+			`admin` tinyint(1) DEFAULT '0',
 			`password` varchar(256) NOT NULL DEFAULT '',
 			`iv` varchar(32) DEFAULT NULL,
 			`last_login` datetime DEFAULT NULL,
@@ -105,7 +119,7 @@
 			return $install_error;
 		}
 		
-		$sql_CreateDB_Catagories = "CREATE TABLE `$prefixCatagories` (
+		$sql_CreateDB_Catagories = "CREATE TABLE $prefixCategories (
 			`id` int(11) unsigned NOT NULL AUTO_INCREMENT,
 			`name` varchar(64) DEFAULT NULL,
 			`icon_vector` longblob,
@@ -113,6 +127,39 @@
 			PRIMARY KEY (`id`)
 		) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
 		if(!mysqli_query($conn, $sql_CreateDB_Catagories)) {
+			$install_error['msql_error'] = "SQL error: ".mysqli_connect_error();
+			return $install_error;
+		}
+		
+		$sql_CreateDB_Items = "CREATE TABLE $prefixItems (
+			`id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+			`name` varchar(64) DEFAULT NULL,
+			`category_id` int(11) DEFAULT NULL,
+			`icon_vector` longblob,
+			`data` longblob,
+			`sailing_user` int(11) DEFAULT '-1',
+			PRIMARY KEY (`id`)
+		) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
+		if(!mysqli_query($conn, $sql_CreateDB_Items)) {
+			$install_error['msql_error'] = "SQL error: ".mysqli_connect_error();
+			return $install_error;
+		}
+		
+		$sql_CreateDB_Items = "CREATE TABLE $prefixEntries (
+			`id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+			`item_id` int(11) NOT NULL,
+			`user_id` int(11) NOT NULL,
+			`device_id` varchar(64) DEFAULT NULL,
+			`type` varchar(128) DEFAULT '',
+			`location_data` longblob,
+			`data_start` longblob,
+			`data_stop` longblob,
+			`datetime_start` datetime NOT NULL,
+			`last_update` datetime NOT NULL ON UPDATE CURRENT_TIMESTAMP,
+			`datetime_stop` datetime DEFAULT NULL,
+			PRIMARY KEY (`id`)
+		) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
+		if(!mysqli_query($conn, $sql_CreateDB_Items)) {
 			$install_error['msql_error'] = "SQL error: ".mysqli_connect_error();
 			return $install_error;
 		}

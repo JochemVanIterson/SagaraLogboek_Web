@@ -9,7 +9,10 @@
 		die;
 	}
 ?>
+<link rel="stylesheet" type="text/css" href="../assets/css/colors.css">
 <link rel="stylesheet" type="text/css" href="../assets/css/admin/admin.css">
+<link rel="stylesheet" type="text/css" href="../assets/css/ui.css">
+<link rel="stylesheet" type="text/css" href="../assets/css/main.css">
 <link rel="stylesheet" type="text/css" href="../assets/css/admin/categories.css">
 
 <script type="text/javascript" src="../assets/js/jquery-3.2.1.min.js"></script>
@@ -52,7 +55,7 @@
 						echo "<tr>";
 							echo "<td class='unselectable'>Image</td>";
 							echo "<td style='padding:0px;'><div class='fileSelector'>";
-								echo $CategoryItm['icon_vector'];
+								if(isset($CategoryItm['icon_vector'])) echo base64_decode($CategoryItm['icon_vector']);
 								echo "<input type='file' accept='.svg' name='icon_vector' id='icon_vector'>";
 							echo "</div></td>";
 						echo "</tr>";

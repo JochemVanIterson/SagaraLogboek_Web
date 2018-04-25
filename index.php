@@ -1,3 +1,4 @@
+
 <?php
 	ini_set('display_errors', 1);
 	ini_set('display_startup_errors', 1);
@@ -55,6 +56,8 @@
 </div>
 
 <!----------- Content ----------->
-<div class='content_view' style=''></div>
+<div class='content_view' style=''>
+	<?php echo file_get_contents("assets/images/app_icon_vector.svg"); ?>
+</div>
 
 </body>

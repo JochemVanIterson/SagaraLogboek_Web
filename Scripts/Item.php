@@ -9,7 +9,9 @@ include($ini_array['BasePath']."Scripts/Encryption.php");
 
 $SQL = new SQL($ini_array);
 
-echo json_encode($_POST);
+//echo json_encode($_POST);
+
+$response = array();
 
 if($_GET['action'] == "Update"){
 	$SQL->updateItem($_POST);
@@ -17,6 +19,10 @@ if($_GET['action'] == "Update"){
 	$SQL->removeItem($_POST['id']);
 } else if($_GET['action'] == "Add"){
 	$SQL->addItem($_POST);
+} else if($_GET['action'] == "Get"){
+	$data = $SQL->getItemEntries($_POST);
+	echo json_encode($data, true);
 }
+
 
 ?>

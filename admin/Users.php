@@ -9,14 +9,17 @@
 		die;
 	}
 ?>
+<link rel="stylesheet" type="text/css" href="../assets/css/colors.css">
 <link rel="stylesheet" type="text/css" href="../assets/css/admin/admin.css">
 <link rel="stylesheet" type="text/css" href="../assets/css/ui.css">
+<link rel="stylesheet" type="text/css" href="../assets/css/main.css">
 <link rel="stylesheet" type="text/css" href="../assets/css/admin/users.css">
 
 <script type="text/javascript" src="../assets/js/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="../assets/js/admin/Users.js"></script>
 
 	
+<div id="admin_content">
 <?php //php inits
 	include($ini_array['BasePath']."Scripts/SQL.php");
 	$SQL = new SQL($ini_array);
@@ -133,4 +136,5 @@
 			</table>
 		</form>
 	</div>
+</div>
 </div>

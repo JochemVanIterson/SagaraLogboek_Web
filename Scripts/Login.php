@@ -14,7 +14,7 @@ if(!isset($_POST['user']) || $_POST['user']=="" || !isset($_POST['pw']) || $_POS
 	if(!isset($_POST['user']) || $_POST['user']==""){
 		if($ErrorState["message"]!="")$ErrorState["message"].=", ";
 		$ErrorState["message"].="User Empty";
-		$ErrorState["message"].="User Empty, ".json_encode($_POST, true);
+		//$ErrorState["message"].="User Empty, ".json_encode($_POST, true);
 	}
 	if(!isset($_POST['pw']) || $_POST['pw']==""){
 		if($ErrorState["message"]!="")$ErrorState["message"].=", ";
